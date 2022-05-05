@@ -6,6 +6,7 @@ from annotated_text import annotated_text
 from collections import Counter
 from pipelines import pipeline
 import nltk
+import requests
 
 nltk.download("popular")
 
@@ -13,29 +14,7 @@ nltk.download("popular")
 from functionforDownloadButtons import download_button
 from requests_html import HTMLSession
 
-if not hasattr(st, 'already_started_server'):
-    # Hack the fact that Python modules (like st) only load once to
-    # keep track of whether this file already ran.
-    st.already_started_server = True
-
-    st.write('''
-        The first time this script executes it will run forever because it's
-        running a Flask server.
-
-        Just close this browser tab and open a new one to see your Streamlit
-        app.
-    ''')
-
-    from flask import Flask
-
-    app = Flask(__name__)
-
-    @app.route('/foo')
-    def serve_foo():
-        return 'This page is served via Flask!'
-
-    app.run(port=8888)
-
+query_params = st.experimental_get_query_params()
 # region Layout size
 
 session = HTMLSession()
@@ -92,10 +71,10 @@ st.header("")
 c3, c4, c5 = st.columns([1, 6, 1])
 
 with c4:
-
+expression_if_true if condition else expression_if_false
     with st.form("Form"):
-
-        URLBox = st.text_input("👇 Paste text below to get started!", autocomplete = "text", placeholder="elon must is the ceo of tesla", help="Don't put more than 1000 words")
+        placeholdertxt = query_params["text"][0] if query_params["text"][0] else "Elon Musk is the ceo of tesla"
+        URLBox = st.text_input("👇 Paste text below to get started!", autocomplete = "text", placeholder=placeholdertxt, help="Don't put more than 1000 words")
         cap = 1000
 
         submitted = st.form_submit_button("Get your Q&A pairs")
