@@ -95,7 +95,7 @@ with c4:
 
     with st.form("Form"):
 
-        URLBox = st.text_input("👇 Paste text below to get started!", autocomplete = "text", placeholder="e.g. https://streamlit.io/", help="Do not forget the https://")
+        URLBox = st.text_input("👇 Paste text below to get started!", autocomplete = "text", placeholder="elon must is the ceo of tesla", help="Don't put more than 1000 words")
         cap = 1000
 
         submitted = st.form_submit_button("Get your Q&A pairs")
@@ -124,7 +124,7 @@ else:
 
 with st.expander(" ↕️ Toggle to check extracted text ", expanded=False):
     st.header("")
-    a = "The full text extraction is " + str(len(text)) + " characters long"
+    a = "The full text extraction is " + str(len(text2)) + " characters long"
     st.header("")
     st.write(text2)
     st.header("")
