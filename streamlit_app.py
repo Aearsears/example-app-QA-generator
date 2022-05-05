@@ -136,7 +136,7 @@ with st.expander(" ↕️ Toggle to check extracted text ", expanded=False):
 try:
     nlp = pipeline("multitask-qa-qg")
     faqs = nlp(text2)
-
+    st.code(faqs, language='python')
     st.markdown("#### **Select your favourite Q&A pairs **")
     st.header("")
 
