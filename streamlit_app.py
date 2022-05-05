@@ -72,11 +72,13 @@ c3, c4, c5 = st.columns([1, 6, 1])
 
 with c4:
     with st.form("Form"):
-        placeholdertxt = query_params["text"][0] if "text" in query_params else "Elon Musk is the ceo of tesla"
-        URLBox = st.text_input("👇 Paste text below to get started!", autocomplete = "text", placeholder=placeholdertxt, help="Don't put more than 1000 words")
+        valuetxt = query_params["text"][0] if "text" in query_params else ""
+        URLBox = st.text_input("👇 Paste text below to get started!", autocomplete = "text", placeholder="Elon Musk is the CEO of Tesla", help="Don't put more than 1000 words",value=valuetxt)
         cap = 1000
 
         submitted = st.form_submit_button("Get your Q&A pairs")
+        if valuetxt != "":
+            submitted = True
 
     c = st.container()
 
