@@ -7,6 +7,7 @@ from collections import Counter
 from pipelines import pipeline
 import nltk
 import requests
+import json
 
 nltk.download("popular")
 
@@ -118,7 +119,7 @@ try:
     faqs = nlp(text2)
     st.code(faqs, language='python')
     url = 'https://cardify-ai.herokuapp.com/api'
-    x = requests.post(url, json = faqs)
+    x = requests.post(url, json = json.dumps(faqs))
     st.code(x, language='python')
     st.markdown("#### **Select your favourite Q&A pairs **")
     st.header("")
