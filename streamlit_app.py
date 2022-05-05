@@ -118,7 +118,7 @@ try:
     nlp = pipeline("multitask-qa-qg")
     faqs = nlp(text2)
     st.code(faqs, language='python')
-    url = 'https://cardify-ai.herokuapp.com/api'
+    url = 'https://cardify-ai.herokuapp.com/qa'
     x = requests.post(url, json = json.dumps(faqs))
     st.code(x, language='python')
     st.markdown("#### **Select your favourite Q&A pairs **")
