@@ -95,7 +95,7 @@ with c4:
 
     with st.form("Form"):
 
-        URLBox = st.text_input("👇 Paste a URL below to get started!", autocomplete = "text", placeholder="e.g. https://streamlit.io/", help="Do not forget the https://")
+        URLBox = st.text_input("👇 Paste text below to get started!", autocomplete = "text", placeholder="e.g. https://streamlit.io/", help="Do not forget the https://")
         cap = 1000
 
         submitted = st.form_submit_button("Get your Q&A pairs")
@@ -111,18 +111,7 @@ with c4:
 
 selector = "p"
 
-try:
-    with session.get(URLBox) as r:
-        paragraph = r.html.find(selector, first=False)
-        text = " ".join([p.text for p in paragraph])
-
-except:
-    c.error(
-        "🚫 The URL seems invalid. Please ensure you've added 'https://' or 'http://' at the start of the URL!"
-    )
-    st.stop()
-
-text2 = (text[:cap] + "..") if len(text) > cap else text
+text2 = (URLBox[:cap] + "..") if len(URLBox) > cap else URLBox
 lenText = len(text2)
 
 if lenText > cap:
