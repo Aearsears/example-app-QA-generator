@@ -11,8 +11,6 @@ import json
 
 nltk.download("popular")
 
-# For Download button (Johannes)
-from functionforDownloadButtons import download_button
 from requests_html import HTMLSession
 
 query_params = st.experimental_get_query_params()
@@ -37,31 +35,6 @@ def _max_width_():
 
 
 _max_width_()
-
-# endregion Layout size 
-
-# region Top area 
-
-# c30, c32 = st.columns([1.9, 1])
-
-# with c30:
-#     st.image("WhatTheFaq.png", width=480)
-#     st.header("")
-# 
-# with c32:
-#     st.header("")
-#     st.text("")
-#     st.header("")
-#     st.markdown(
-#         "###### Made in [![this is an image link](https://i.imgur.com/iIOA6kU.png)](https://www.streamlit.io/)&nbsp, with :heart: by [@DataChaz](https://www.charlywargnier.com/) &nbsp | &nbsp [![this is an image link](https://i.imgur.com/thJhzOO.png)](https://www.buymeacoffee.com/cwar05)"
-#     )
-#     st.text("")
-
-st.image(
-    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/person-raising-hand_1f64b.png",
-    width=100,
-)
-
 
 st.title("Q&A Generator")
 
@@ -120,7 +93,7 @@ try:
     st.code(faqs, language='python')
     url = 'https://cardify-ai.herokuapp.com/qa'
     x = requests.post(url, json = json.dumps(faqs))
-    st.code(x, language='python')
+    st.code(x.status_code, language='python')
     st.markdown("#### **Select your favourite Q&A pairs **")
     st.header("")
 
@@ -159,19 +132,6 @@ try:
 
     st.markdown("#### ** Download your selected Q&A pairs! **")
     st.header("")
-
-    if result.empty:
-        b = "To download your Q&A's you need to start selecting them! ☝️"
-        annotated_text(
-            (b, "", "#faa"),
-        )
-
-    else:
-        result = result[["question", "answer"]]
-        CSVButton2 = download_button(
-            result, "Downloaded_Q&As.csv", "📥 Download your Q&As"
-        )
-        st.table(result)
 
 except Exception as e:
     st.warning(
